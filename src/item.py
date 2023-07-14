@@ -27,16 +27,8 @@ class Item:
         """
         return self.price * self.quantity
 
-    def apply_discount(self) -> float:
+    def apply_discount(self) -> None:
         """
         Применяет установленную скидку для конкретного товара.
         """
         self.price = self.price * self.pay_rate
-        return self.price
-
-    def get_value(self):
-        """
-        Функция, возвращает все значения экземпляра класса
-        @return:
-        """
-        return self.name, self.price, self.quantity
