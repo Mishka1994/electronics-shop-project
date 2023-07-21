@@ -26,3 +26,12 @@ def test_instance_from_csv():
     Item.instantiate_from_csv()
     first_instance_from_all = Item.all[0]
     assert first_instance_from_all.name == "Смартфон"
+
+
+def test_repr(item_1):
+    assert repr(item_1) == "Item('Смартфон', 5000, 5)"
+
+
+def test_str(item_1):
+    assert str(item_1) == "Смартфон"
+
