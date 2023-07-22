@@ -1,6 +1,7 @@
 import csv
 
 
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -25,6 +26,11 @@ class Item:
 
     def __str__(self):
         return f"{self.__name}"
+
+    def __add__(self, other):
+        if isinstance(self, Item) and issubclass(other.__class__, Item):
+            return self.quantity + other.quantity
+
 
     @classmethod
     def instantiate_from_csv(cls):
