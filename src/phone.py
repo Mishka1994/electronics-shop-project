@@ -2,6 +2,11 @@ from src.item import Item
 
 
 class Phone(Item):
+    """
+    Класс наследует поведение от класса Item
+    При инициализации принимает один доп. параметр
+    __number_of_sim: количество сим_карт в устройстве
+    """
     def __init__(self, name, price, quantity, number_of_sim):
         super().__init__(name, price, quantity)
         self.__number_of_sim = number_of_sim
