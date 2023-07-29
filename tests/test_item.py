@@ -8,8 +8,6 @@ def test_item_name(item_1):
     assert item_1.quantity == 5
 
 
-
-
 def test_calc_total_price(item_1):
     assert item_1.calculate_total_price() == 25000.0
 

@@ -11,3 +11,8 @@ def test_repr(phone_1):
 
 def test_add(item_1, phone_1):
     assert item_1 + phone_1 == 25
+
+
+def test_number_of_sim(phone_2):
+    assert phone_2.number_of_sim == 0
+
