@@ -1,5 +1,5 @@
 import pytest
-from src.item import Item
+from src.item import Item, DamagedFile
 from src.phone import Phone
 from src.keyboard import Keyboard
 
@@ -13,12 +13,18 @@ def item_1():
 def phone_1():
     return Phone("iPhone 14", 120000, 5, 2)
 
+
 @pytest.fixture()
 def phone_2():
     return Phone("iPhone 13", 90000, 10, 0)
 
 
-
 @pytest.fixture()
 def keyboard_1():
     return Keyboard('Defender', 3000, 5)
+
+
+@pytest.fixture()
+def damage_file():
+    test_ex = DamagedFile("Файл поврежден")
+    return test_ex
