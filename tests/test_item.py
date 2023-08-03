@@ -1,4 +1,9 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
+from pathlib import Path
+
+import pytest
+from src.item import DamagedFile
+from settings import ROOT_PATH
 from src.item import Item
 
 
@@ -34,4 +39,22 @@ def test_repr(item_1):
 
 def test_str(item_1):
     assert str(item_1) == "Смартфон"
+
+
+def test_instantiate_from_csv_found_error():
+    Item.csv_path = Path.joinpath(ROOT_PATH, 'src', 'wrong.csv')
+    with pytest.raises(FileNotFoundError):
+        Item.instantiate_from_csv()
+
+
+def test_instance_from_csv_file_damaged():
+    Item.csv_path = Path.joinpath(ROOT_PATH, 'src', 'test_csv.csv')
+    with pytest.raises(DamagedFile):
+        Item.instantiate_from_csv()
+
+
+def test_damaged_file(damage_file):
+    result = DamagedFile("Файл поврежден")
+    assert result == damage_file
+
 

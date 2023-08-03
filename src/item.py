@@ -1,5 +1,14 @@
 import csv
 
+from settings import CSV_PATH
+
+
+class DamagedFile(Exception):
+    def __init__(self, message):
+        self.message = message
+
+    def __str__(self):
+        return f"DamagedFile: {self.message}"
 
 
 class Item:
@@ -8,6 +17,7 @@ class Item:
     """
     pay_rate = 1.0
     all = []
+    csv_path = CSV_PATH
 
     def __init__(self, name: str, price: float, quantity: int) -> None:
         """
@@ -32,13 +42,17 @@ class Item:
         if isinstance(self, Item) and issubclass(other.__class__, Item):
             return self.quantity + other.quantity
 
-
     @classmethod
     def instantiate_from_csv(cls):
-        with open("items.csv", newline='', encoding='cp1251') as csvfile:
+        if not cls.csv_path.exists():
+            raise FileNotFoundError("Отсутствует файл")
+        with open(cls.csv_path, newline='', encoding='cp1251') as csvfile:
             reader = csv.DictReader(csvfile)
             for x in reader:
-                Item.all.append(Item(x["name"], x["price"], x["quantity"]))
+                print(x)
+                if None in x.values():
+                    raise DamagedFile("Файл поврежден")
+            Item.all.append(Item(x["name"], x["price"], x["quantity"]))
 
     @property
     def name(self):
@@ -75,3 +89,6 @@ class Item:
         for x in range(len(string)):
             if string[x].isdigit():
                 return int(string[x])
+
+
+print(Item.instantiate_from_csv())
