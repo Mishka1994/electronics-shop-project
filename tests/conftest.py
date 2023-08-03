@@ -1,5 +1,5 @@
 import pytest
-from src.item import Item, DamagedFile
+from src.item import Item, InstantiateCSVError
 from src.phone import Phone
 from src.keyboard import Keyboard
 
@@ -26,5 +26,5 @@ def keyboard_1():
 
 @pytest.fixture()
 def damage_file():
-    test_ex = DamagedFile("Файл поврежден")
+    test_ex = InstantiateCSVError("Файл поврежден")
     return test_ex
