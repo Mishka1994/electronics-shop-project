@@ -3,12 +3,13 @@ import csv
 from settings import CSV_PATH
 
 
-class DamagedFile(Exception):
+class InstantiateCSVError(Exception):
+    """Класс-исключение для проверки целостности файла"""
     def __init__(self, message):
         self.message = message
 
     def __str__(self):
-        return f"DamagedFile: {self.message}"
+        return f"InstantiateCSVError: {self.message}"
 
 
 class Item:
@@ -51,7 +52,7 @@ class Item:
             for x in reader:
                 print(x)
                 if None in x.values():
-                    raise DamagedFile("Файл поврежден")
+                    raise InstantiateCSVError("Файл поврежден")
             Item.all.append(Item(x["name"], x["price"], x["quantity"]))
 
     @property

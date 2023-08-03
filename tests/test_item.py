@@ -2,7 +2,7 @@
 from pathlib import Path
 
 import pytest
-from src.item import DamagedFile
+from src.item import InstantiateCSVError
 from settings import ROOT_PATH
 from src.item import Item
 
@@ -49,12 +49,12 @@ def test_instantiate_from_csv_found_error():
 
 def test_instance_from_csv_file_damaged():
     Item.csv_path = Path.joinpath(ROOT_PATH, 'src', 'test_csv.csv')
-    with pytest.raises(DamagedFile):
+    with pytest.raises(InstantiateCSVError):
         Item.instantiate_from_csv()
 
 
 def test_damaged_file(damage_file):
-    result = DamagedFile("Файл поврежден")
+    result = InstantiateCSVError("Файл поврежден")
     assert result == damage_file
 
 
